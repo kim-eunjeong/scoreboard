@@ -2,6 +2,7 @@ import React from 'react'; //jsx문법 썼기에 react import
 import './App.css';
 import {Header} from './componets/Header'
 import {Player} from "./componets/Player";
+import {AddPlayerForm} from "./componets/AddPlayerForm";
 //CTRL+ALT+O : 안쓰는 구문 자동으로 안보여주게 함
 
 class App extends React.Component{
@@ -18,12 +19,16 @@ class App extends React.Component{
   render() {
     return (
       <div className="scoreboard">
-        <Header title="My scoreboard" totalPlayers={this.state.players.length} />
+        {/*<Header title="My scoreboard" totalPlayers={this.state.players.length} />*/}
+
+        {/*Stats.js 제어하기 위해 players를 배열로 넘겨줌*/}
+				<Header title="My scoreboard" players={this.state.players} />
         { this.state.players.map(item =>
           <Player name={item.name} id={item.id} score={item.score} key={item.id}
                   changeScore={this.handleChangeScore}
                   removerPlayer={this.handleRemovePlayer}/>)
         }
+        <AddPlayerForm/>
       </div>
     )};
 
@@ -52,7 +57,6 @@ class App extends React.Component{
   // 1. 부모 컴포넌트에 펑션 작성
   // 2. 펑션을 자식에게 props로 전달
   // 3. 자식 컴포넌트가 props 로 받은 펑션을 호출
-
 };
 
 export default App;
