@@ -4,7 +4,7 @@ import {Header} from './componets/Header'
 import {Player} from "./componets/Player";
 import {AddPlayerForm} from "./componets/AddPlayerForm";
 //CTRL+ALT+O : 안쓰는 구문 자동으로 안보여주게 함
-
+let maxId = 4;
 class App extends React.Component{
   state = {
     players : [
@@ -28,7 +28,7 @@ class App extends React.Component{
                   changeScore={this.handleChangeScore}
                   removerPlayer={this.handleRemovePlayer}/>)
         }
-        <AddPlayerForm/>
+        <AddPlayerForm addPlayer={this.handleAddPlayer}></AddPlayerForm>
       </div>
     )};
 
@@ -57,6 +57,16 @@ class App extends React.Component{
   // 1. 부모 컴포넌트에 펑션 작성
   // 2. 펑션을 자식에게 props로 전달
   // 3. 자식 컴포넌트가 props 로 받은 펑션을 호출
+
+  handleAddPlayer = (name) =>{
+    console.log('handleAddPlayer', name);
+    this.setState(prevState => {
+      //deep copy하는 방법 ...prevState.players
+      const players = [...prevState.players];
+      players.push({id: ++maxId, name:name, score:0}); //push() 배열의 맨 뒤에 추가한다.
+      return{ players: players} //return{players}
+    })
+  }
 };
 
 export default App;
