@@ -19,7 +19,7 @@ export class Stopwatch extends React.Component {
 				<h1 className="h1">StopWatch</h1>
 				<span className="stopwatch-time">{this.state.timer}</span>
 				<button onClick={this.handleStopwatch.bind(this)}>{this.state.isRunning ? 'Stop' : 'Start'}</button>
-				<button onClick={() => this.setState({timer:0})}>Reset</button>
+				<button onClick={() => {this.setState({timer:0});}}>Reset</button>
 			{/*	애로우펑션으로 선언문으로 만들어준다.*/}
 			</div>
 		);
