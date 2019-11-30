@@ -39,3 +39,19 @@ export class Player extends React.Component{
 // 		</div>
 // 	);
 // }
+
+//es6문법   destructing assignment
+// export class Player1 extends React.PureComponent{
+// 	render() {
+// 		const {removerPlayer, id, score, changeScore } = this.props;
+// 		return (
+// 					<div className="player">
+// 					 <span className="player-name">
+// 					<button className="remove-player" onClick={() => removerPlayer(id)}>x</button>
+// 					{this.props.name}
+// 					</span>
+// 					<Counter id={id} score={score} changeScore={changeScore}/>
+// 					</div>
+// 		);
+// 	}
+// }
