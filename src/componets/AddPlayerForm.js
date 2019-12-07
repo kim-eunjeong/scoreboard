@@ -1,16 +1,15 @@
 import React from 'react';
+import {addPlayer} from "../redux/actions";
+import {connect} from "react-redux";
 
 export class AddPlayerForm extends React.Component {
-state ={
-	value: ''
-}
 
-	handleValueChange(e){ //자바스크립트는 오버로딩이 없기때문에 이벤트 파라미터 e
-		console.log(e);
-		this.setState({
-			value: e.target.value // DOM> input의 value
-		})
-	}
+	// handleValueChange(e){ //자바스크립트는 오버로딩이 없기때문에 이벤트 파라미터 e
+	// 	console.log(e);
+	// 	this.setState({
+	// 		value: e.target.value // DOM> input의 value
+	// 	})
+	// }
 
 	handleSumit(e){
 	 e.preventDefault(); //이벤트의 기본동작 막는방법 -> 깜빡임이 없음
@@ -24,15 +23,15 @@ state ={
 			//isNameValid = true; 에러문구 컨디셔널 렌더링
 			return;
 		}
-		this.props.addPlayer(this.state.value);
-	//Form 초기화
-	this.setState({value:''})
+		this.props.addPlayer(playNode.value);
+	//Form 초기화 -> state를 안쓰기 때문에
+	// this.setState({value:''})
+		playNode.value = '';
 	}
 	render() {
 		return (
 			<form className="form" onSubmit={this.handleSumit.bind(this)}>
-				<input type="text" id="player" minLength="5" className="input" value={this.state.value}
-							 onChange={this.handleValueChange.bind(this)}
+				<input type="text" id="player" minLength="5" className="input"
 							 placeholder="enter a player's name" required/>
 				{/* 애로우펑션이 아니면 bind()함수사용 + required: value값 빈값체크 + noValidate: 유효성체크 해제*/}
 				<input type="submit" className="input" value="Add Player"/>
@@ -40,3 +39,9 @@ state ={
 		);
 	}
 }
+
+const mapActionToProps = (dispatch) => ({
+	//왼쪽 props, 오른쪽 펑션
+	addPlayer: (name) => dispatch(addPlayer(name)) //액션을 dispath
+})
+export default connect(null, mapActionToProps)(AddPlayerForm);

@@ -1,4 +1,6 @@
 import React from 'react';
+import {changeScore} from "../redux/actions";
+import {connect} from "react-redux";
 
 export class Counter extends React.Component{
 
@@ -25,3 +27,9 @@ export class Counter extends React.Component{
 		);
 	};
 };
+
+const mapActionToProps = (dispatch) => ({
+	//왼쪽 props, 오른쪽 펑션
+	changeScore: (id, delta) => dispatch(changeScore(id, delta)) //액션을 dispath
+})
+export default connect(null, mapActionToProps)(Counter);

@@ -1,5 +1,7 @@
 import React from 'react';
-import {Counter} from "./Counter";
+import Counter from "./Counter";
+import {removePlayer} from "../redux/actions";
+import {connect} from "react-redux";
 
 //PureComponet => 해당 아이디만 렌더링된다.
 export class Player extends React.Component{
@@ -8,10 +10,10 @@ export class Player extends React.Component{
 		return (
 			<div className="player">
       <span className="player-name">
-				<button className="remove-player" onClick={() => this.props.removerPlayer(this.props.id)}>x</button>
+				<button className="remove-player" onClick={() => this.props.removePlayer(this.props.id)}>x</button>
 				{this.props.name}
       </span>
-				<Counter id={this.props.id} score={this.props.score} changeScore={this.props.changeScore}/>
+				<Counter id={this.props.id} score={this.props.score}/>
 			</div>
 		);
 	}
@@ -55,3 +57,9 @@ export class Player extends React.Component{
 // 		);
 // 	}
 // }
+
+const mapActionToProps = (dispatch) => ({
+	//왼쪽 props, 오른쪽 펑션
+	removePlayer: (id) => dispatch(removePlayer(id)) //액션을 dispath
+})
+export default connect(null, mapActionToProps)(Player);
